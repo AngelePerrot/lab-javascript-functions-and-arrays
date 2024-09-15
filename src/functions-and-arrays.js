@@ -193,19 +193,17 @@ const wordsCount = [
 ];
 
 function howManyTimes(array, word) {
-  if (!array.length) return 0;
-
   let count = 0;
+
   array.forEach((item) => {
     if (item === word) {
       count++;
     }
   });
-
   return count;
 }
 
-console.log(howManyTimes(wordsCount, "cat"));
+console.log(howManyTimes(wordsCount, "truth"));
 
 //  ------------------------------------------------ Iteration #8: Bonus
 const matrix = [
@@ -275,7 +273,34 @@ const matrix = [
 
 function greatestProduct(array) {
   if (!array.length) return null;
+
+  let maxProduct = 0;
+
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+
+  // Check horizontal and vertical products
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols - 3; j++) {
+      // Horizontal product
+      const horizProduct =
+        matrix[i][j] * matrix[i][j + 1] * matrix[i][j + 2] * matrix[i][j + 3];
+      maxProduct = Math.max(maxProduct, horizProduct);
+    }
+  }
+
+  for (let i = 0; i < rows - 3; i++) {
+    for (let j = 0; j < cols; j++) {
+      // Vertical product
+      const vertProduct =
+        matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+      maxProduct = Math.max(maxProduct, vertProduct);
+    }
+  }
+
+  return maxProduct;
 }
+console.log(greatestProduct(matrix));
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
